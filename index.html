@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jaan!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="emoji-container"></div>
+    <div class="container">
+        <form id="loginForm" class="login-form">
+            <h1>Birthday Surprise!</h1>
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" value="I'm aruu" readonly>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Enter</button>
+            <p id="message"></p>
+        </form>
+    </div>
+
+    <script>
+        // --- Emoji Background Animation ---
+        const emojis = ["❤️","😍","🥰","🤪","😜","😝","😳","😵‍💫","😫","🎂","💐","🫀"];
+        const container = document.querySelector('.emoji-container');
+        for (let i = 0; i < 30; i++) {
+            let emoji = document.createElement('span');
+            emoji.classList.add('emoji');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = Math.random() * 3 + 5 + 's'; // Slower animation
+            container.appendChild(emoji);
+        }
+
+        // --- Form Validation ---
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.getElementById('password').value;
+            const message = document.getElementById('message');
+            if (password === 'pglet baby') {
+                message.textContent = 'wah meri jaan❤️😫';
+                message.style.color = '#32cd32';
+                // Redirect to next page after a short delay
+                setTimeout(() => {
+                    window.location.href = 'surprise.html';
+                }, 1500);
+            } else {
+                message.textContent = 'gadhi hi rhogi 🥲';
+                message.style.color = '#ff4757';
+            }
+        });
+    </script>
+</body>
+</html>

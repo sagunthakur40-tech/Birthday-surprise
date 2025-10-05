@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise For You!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="emoji-container"></div>
+
+    <div class="container" id="pageContainer">
+        <div class="page active" id="page1">
+            <p class="fade-in-up" style="animation-delay: 0.5s;">happy birthday pgl🥺</p>
+            <p class="fade-in-up" style="animation-delay: 2s;">Aaj ka din mere liye bahut jyda khas hai bht jyda khusi ho rhi hai aaj aapka birthday hai aapke liye ye surprise banane mai kafi time lga hai aapko mera surprise bahut badiya lge🥺❤️</p>
+            <button class="fade-in-up" style="animation-delay: 4s;" onclick="nextPage()">Aage badho</button>
+        </div>
+
+        <div class="page" id="page2">
+            <form class="question-form" onsubmit="checkAnswer(event, '12-10-2023', 'hehehehe it\'s easy aage ka dekhta hu kaise batate ho😉', 'lg rha hai patthar se pitna chahte ho🥲')">
+                <h2>hamari first kiss ki date batao jra😑</h2>
+                <input type="text" id="answer1" placeholder="DD-MM-YYYY" required>
+                <button type="submit">Check</button>
+                <p class="message"></p>
+            </form>
+        </div>
+
+        <div class="page" id="page3">
+             <p>yrr aaj bahut khas din hai aaj aapke sath aapka 3rd birthday banaunga kafi jaldi jaldi din beet rhe hai jo ki kafi achha hai aise hi hamare shadi ka din jaldi hi aa jayega sab dekhte rah jayenge❤️</p>
+             <p style="font-size: 2em; margin-top: 20px;">❤️Happy birthday Babu❤️</p>
+             <button onclick="nextPage()">Next Question</button>
+        </div>
+        
+        <div class="page" id="page4">
+            <form class="question-form" onsubmit="checkAnswer(event, 'hubby', 'sudhar jao meri maa🥲', 'aapko nhi pta mai aapka kya lgta hu?')">
+                <h2>abhi tak sabse jyda gussa kispe huye ho🥲</h2>
+                <input type="text" id="answer2" placeholder="Aapka jawab..." required>
+                <button type="submit">Check</button>
+                <p class="message"></p>
+            </form>
+        </div>
+
+        <div class="page" id="page5">
+            <p>Yrr meri pagal na jane apko maja aa rha hoga ki nhi lekin isme na jane mera kitna dimag khrch hua hai😂 lekin mujhe ye banate time bht maja aa rha hua to ummid hai aapko apna surprise bhi ikdam meri tarah pyara lg rha hoga🫣</p>
+            <button onclick="nextPage()">Last Step!</button>
+        </div>
+        
+        <div class="page" id="page6">
+             <h1 class="special-h1">happy birthday my special person</h1>
+             <div class="options">
+                <button onclick="alert('Aage ke surprise ke liye ready raho! ❤️')">1. Surprise chahiye?</button>
+                <button onclick="showNaaliMessage()">2. Surprise nhi chahiye</button>
+             </div>
+             <p id="naali-message" class="message" style="margin-top: 20px;"></p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- Emoji Background Animation ---
+        const emojis = ["❤️","😍","🥰","🎂","💐","🫀","😘","🥳","🎉"];
+        const container = document.querySelector('.emoji-container');
+        for (let i = 0; i < 30; i++) {
+            let emoji = document.createElement('span');
+            emoji.classList.add('emoji');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.animationDuration = Math.random() * 5 + 7 + 's';
+            container.appendChild(emoji);
+        }
+
+        // --- Page Navigation ---
+        let currentPage = 1;
+        const totalPages = 6;
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage++;
+                document.getElementById(`page${currentPage}`).classList.add('active');
+            }
+        }
+
+        function checkAnswer(event, correctAnswer, correctMessage, wrongMessage) {
+            event.preventDefault();
+            const form = event.target;
+            const input = form.querySelector('input');
+            const messageEl = form.querySelector('.message');
+            
+            // For "hubby", we ignore case. For date, it should be exact.
+            const isCorrect = correctAnswer === 'hubby' 
+                ? input.value.trim().toLowerCase() === correctAnswer 
+                : input.value.trim() === correctAnswer;
+
+            if (isCorrect) {
+                messageEl.textContent = correctMessage;
+                messageEl.style.color = '#32cd32';
+                setTimeout(nextPage, 2000); // Go to next page after 2 seconds
+            } else {
+                messageEl.textContent = wrongMessage;
+                messageEl.style.color = '#ff4757';
+            }
+        }
+        
+        function showNaaliMessage() {
+            const msg = document.getElementById('naali-message');
+            msg.textContent = 'Lg rha hai aapko redi ke side wali naali kafi pasand aa chuki hai🥲 santi se upar click kr rhe ho ki nhi🥲';
+            msg.style.color = '#ff6348';
+        }
+    </script>
+</body>
+</html>
